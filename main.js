@@ -2,7 +2,7 @@ let stars;
 let playerImage;
 let meteorImage;
 let meteorChance = 0.02;
-let pillowChance = 0.01;
+let pillowChance = 0.001;
 let score = 0;  //NEW
 let GAMEOVER = 0; //NEW
 let player = {
@@ -111,7 +111,7 @@ function draw(){
     });
     pillows.forEach((pillow,i) =>{
         if(pillow.y> height){
-            pillow.splice(i,1);
+            pillows.splice(i,1);
             score += 1; //new line right here
         }
     })
