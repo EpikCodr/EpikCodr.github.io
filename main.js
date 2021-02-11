@@ -1,7 +1,8 @@
 let stars;
 let playerImage;
 let meteorImage;
-let meteorChance = 0.2;
+let meteorChance = 0.02;
+let pillowChance = 0.01;
 let score = 0;  //NEW
 let GAMEOVER = 0; //NEW
 let player = {
@@ -16,11 +17,17 @@ let meteors = [{
     y:0,
     yVel:0
 }];
+let pillows = [{
+    x:500,
+    y:0,
+    yVel:0
+}];
 let keysPressed = {};
 function preload(){
     stars = loadImage("stars.png");
     playerImage = loadImage("link.png");
     meteorImage = loadImage("unnamed.png");
+    pillowImage = loadImage("PillowOfLife.png");
 }
 
 function setup(){
@@ -83,8 +90,40 @@ function draw(){
             score += 1; //new line right here
         }
     })
+    pillows.forEach(pillow => {
+        image(pillowImage,pillow.x,pillow.y,48,48);
+        let touchingPlayer = overlappingRects(player.x, player.y, playerImage.width, playerImage.height, pillow.x, pillow.y, pillowImage.width, pillowImage.height);
+        if (touchingPlayer && player.hp>0){
+            player.hp += 1;
+        }
+        noFill();
+        if (touchingPlayer){
+            stroke(255,0,0);
+        } else{
+            stroke(255);
+        }
+            stroke(255);
+            strokeWeight(3);
+            //rect(meteor.x,meteor.y,48,48);
+            pillow.yVel += 0.25;
+            pillow.y += pillow.yVel;
+
+    });
+    pillow.forEach((pillow,i) =>{
+        if(pillow.y> height){
+            pillow.splice(i,1);
+            score += 1; //new line right here
+        }
+    })
     if(Math.random()<meteorChance){
         meteors.push({
+            x: random(1000),
+            y : 0,
+            yVel : 0
+        }) 
+    }
+    if(Math.random()<pillowChance){
+        pillows.push({
             x: random(1000),
             y : 0,
             yVel : 0
