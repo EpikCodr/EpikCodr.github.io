@@ -109,7 +109,7 @@ function draw(){
             pillow.y += pillow.yVel;
 
     });
-    pillow.forEach((pillow,i) =>{
+    pillows.forEach((pillow,i) =>{
         if(pillow.y> height){
             pillow.splice(i,1);
             score += 1; //new line right here
