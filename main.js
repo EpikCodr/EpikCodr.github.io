@@ -137,9 +137,10 @@ function draw(){
    if (player.hp <= 0){ //NEW
        GAMEOVER = 1;  //NEW 
    }  //NEW
+   if(GAMEOVER == 1){
    background(0);
    image(over,0,0,1000,700);
-
+   }
 }
 
 function keyPressed(){
